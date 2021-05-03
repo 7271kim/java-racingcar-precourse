@@ -56,6 +56,16 @@ public class CarGroupTest {
 		assertThat(carGroup.getRandomNumbers().length).isEqualTo(3);
 	}
 
+	@Test
+	@DisplayName("int[]배열을 받아 4 이상일 경우  전진한다.")
+	public void moveAllTest() {
+		int[] moveValue = {5, 3, 4};
+		carGroup.moveAll(moveValue);
+		assertThat(carGroup.getCars().get(0).getCarDistance()).isEqualTo(1);
+		assertThat(carGroup.getCars().get(1).getCarDistance()).isEqualTo(0);
+		assertThat(carGroup.getCars().get(2).getCarDistance()).isEqualTo(1);
+	}
+
 	private void checkHasAllNumber(int[] cache) {
 		for (int index = 1; index < 9; index++) {
 			assertThat(cache[index]).isEqualTo(1);
