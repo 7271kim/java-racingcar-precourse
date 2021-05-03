@@ -21,6 +21,14 @@ public class CarGroup {
 	public void playOne() {
 		int[] numbers = getRandomNumbers();
 		moveAll(numbers);
+		showCarsStatus();
+	}
+
+	private void showCarsStatus() {
+		for (Car car : cars) {
+			car.showStatus();
+		}
+		System.out.println();
 	}
 
 	private void checkValidation(List<Car> cars) {
