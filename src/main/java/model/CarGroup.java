@@ -2,10 +2,10 @@ package model;
 
 import java.util.List;
 
+import constant.IntegetGroup;
+import constant.ValidationMessage;
+
 public class CarGroup {
-	private static final int MIN_NUMBER = 1;
-	private static final int MAX_NUMBER = 9;
-	private static final int STANDARD_MOVE_NUMBER = 4;
 
 	private List<Car> cars;
 
@@ -30,13 +30,13 @@ public class CarGroup {
 
 	private void checkNull(List<Car> cars) {
 		if (null == cars || cars.size() == 0) {
-			throw new IllegalArgumentException("빈 배열이 들어왔습니다. 생성자를 확인하세요");
+			throw new IllegalArgumentException(ValidationMessage.NOT_EMPTY_SIZE.getMessage());
 		}
 	}
 
 	private void checkSize(List<Car> cars) {
 		if (cars.size() < 2) {
-			throw new IllegalArgumentException("최소 2개 이상의 배열이 들어와야 합니다. 생성자를 확인하세요");
+			throw new IllegalArgumentException(ValidationMessage.NOT_ARRAY_SIZE.getMessage());
 		}
 	}
 
@@ -48,7 +48,7 @@ public class CarGroup {
 	}
 
 	private boolean isMovePossible(int number) {
-		return number >= STANDARD_MOVE_NUMBER;
+		return number >= IntegetGroup.STANDARD_MOVE_NUMBER.getNumber();
 	}
 
 	protected int[] getRandomNumbers() {
@@ -61,7 +61,9 @@ public class CarGroup {
 	}
 
 	protected int getRandomNumber() {
-		return (int)((Math.random() * (MAX_NUMBER - MIN_NUMBER + 1)) + MIN_NUMBER);
+		int maxNumber = IntegetGroup.MAX_NUMBER.getNumber();
+		int minNumber = IntegetGroup.MIN_NUMBER.getNumber();
+		return (int)((Math.random() * (maxNumber - minNumber + 1)) + minNumber);
 	}
 
 	protected void moveAll(int[] moveValues) {

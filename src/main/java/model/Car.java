@@ -1,9 +1,8 @@
 package model;
 
-public class Car {
+import constant.TextGroup;
 
-	private static final String INTER_TEXT = ":";
-	private static final String SEPARATOR_TEXT = "-";
+public class Car {
 
 	private CarName carName;
 	private CarDistance carDistance;
@@ -15,10 +14,10 @@ public class Car {
 
 	protected String getStatus() {
 		StringBuffer temp = new StringBuffer();
-		temp.append(carName.getName()).append(INTER_TEXT);
+		temp.append(carName.getName()).append(TextGroup.INTER_TEXT.getText());
 		int distance = carDistance.getDistance();
 		for (int index = 0; index < distance; index++) {
-			temp.append(SEPARATOR_TEXT);
+			temp.append(TextGroup.SEPARATOR_TEXT.getText());
 		}
 		return temp.toString();
 	}
