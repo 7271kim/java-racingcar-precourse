@@ -1,15 +1,18 @@
 package model;
 
 import constant.TextGroup;
+import io.RacingGameOutput;
 
 public class Car implements Comparable<Car> {
 
 	private CarName carName;
 	private CarDistance carDistance;
+	private RacingGameOutput output;
 
-	public Car(String name) {
+	public Car(String name, RacingGameOutput output) {
 		this.carName = new CarName(name);
 		this.carDistance = new CarDistance();
+		this.output = output;
 	}
 
 	protected String getStatus() {
@@ -23,7 +26,7 @@ public class Car implements Comparable<Car> {
 	}
 
 	public void showStatus() {
-		System.out.println(getStatus());
+		output.showText(getStatus());
 	}
 
 	public int move() {

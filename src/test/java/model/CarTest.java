@@ -6,13 +6,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import io.RacingGameOutput;
+import io.impl.RacingGameConsoleOutput;
+
 public class CarTest {
 
 	private Car car;
+	private RacingGameOutput output = new RacingGameConsoleOutput();
 
 	@BeforeEach
 	public void setUp() {
-		car = new Car("김석진차");
+		car = new Car("김석진차", output);
 	}
 
 	@Test

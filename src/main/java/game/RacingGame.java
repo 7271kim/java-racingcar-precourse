@@ -3,6 +3,8 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.RacingGameInput;
+import io.RacingGameOutput;
 import model.Car;
 import model.CarGroup;
 import model.GameCount;
@@ -10,9 +12,11 @@ import model.GameCount;
 public class RacingGame {
 
 	private RacingGameInput racingInput;
+	private RacingGameOutput racingOutput;
 
-	public RacingGame(RacingGameInput racingInput) {
+	public RacingGame(RacingGameInput racingInput, RacingGameOutput racingOutput) {
 		this.racingInput = racingInput;
+		this.racingOutput = racingOutput;
 	}
 
 	public void start() {
@@ -27,9 +31,10 @@ public class RacingGame {
 	private GameCount getGameCountFromInput() {
 		GameCount count;
 		try {
-			count = new GameCount(racingInput.getGameCount());
+			racingOutput.requireCount();
+			count = new GameCount(racingInput.getCountText());
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			racingOutput.showText(e.getMessage());
 			count = getGameCountFromInput();
 		}
 		return count;
@@ -40,19 +45,20 @@ public class RacingGame {
 		try {
 			result = getCarList();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			racingOutput.showText(e.getMessage());
 			result = getCarGroupFromInput();
 		}
 		return result;
 	}
 
 	private CarGroup getCarList() {
+		racingOutput.requireCarNames();
 		String[] carNames = racingInput.getCarNames().split(",");
 		List<Car> cars = new ArrayList<>();
 		for (String name : carNames) {
-			cars.add(new Car(name));
+			cars.add(new Car(name, racingOutput));
 		}
-		return new CarGroup(cars);
+		return new CarGroup(cars, racingOutput);
 	}
 
 }

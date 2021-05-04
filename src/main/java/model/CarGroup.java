@@ -6,6 +6,7 @@ import java.util.List;
 
 import constant.IntegetGroup;
 import constant.ValidationMessage;
+import io.RacingGameOutput;
 
 public class CarGroup {
 
@@ -13,9 +14,12 @@ public class CarGroup {
 
 	private List<Car> cars;
 
-	public CarGroup(List<Car> cars) {
+	private RacingGameOutput output;
+
+	public CarGroup(List<Car> cars, RacingGameOutput output) {
 		checkValidation(cars);
 		this.cars = cars;
+		this.output = output;
 	}
 
 	public List<Car> getCars() {
@@ -34,14 +38,14 @@ public class CarGroup {
 		for (Car winner : winners) {
 			result.add(winner.getCarName());
 		}
-		System.out.println(String.join(",", result) + "가 최종 우승했습니다.");
+		output.showWinnerMessage(String.join(",", result));
 	}
 
 	private void showCarsStatus() {
 		for (Car car : cars) {
 			car.showStatus();
 		}
-		System.out.println();
+		output.showText("");
 	}
 
 	private void checkValidation(List<Car> cars) {

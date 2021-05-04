@@ -10,17 +10,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import io.RacingGameOutput;
+import io.impl.RacingGameConsoleOutput;
+
 public class CarGroupTest {
 	private static final int ENOUGH_BIG_NUMBER = 10000;
 	private CarGroup carGroup;
+	private RacingGameOutput output = new RacingGameConsoleOutput();
 
 	@BeforeEach
 	public void setUp() {
 		List<Car> cars = new ArrayList<>();
-		cars.add(new Car("김석진차"));
-		cars.add(new Car("우리집차"));
-		cars.add(new Car("학원차"));
-		carGroup = new CarGroup(cars);
+		cars.add(new Car("김석진차", output));
+		cars.add(new Car("우리집차", output));
+		cars.add(new Car("학원차", output));
+		carGroup = new CarGroup(cars, output);
 	}
 
 	@Test
@@ -28,8 +32,8 @@ public class CarGroupTest {
 	public void checkValidation() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			List<Car> cars = new ArrayList<>();
-			cars.add(new Car("김석진차"));
-			carGroup = new CarGroup(cars);
+			cars.add(new Car("김석진차", output));
+			carGroup = new CarGroup(cars, output);
 		});
 	}
 
@@ -38,7 +42,7 @@ public class CarGroupTest {
 	public void checkValidationSize() {
 		assertThrows(IllegalArgumentException.class, () -> {
 			List<Car> cars = new ArrayList<>();
-			carGroup = new CarGroup(cars);
+			carGroup = new CarGroup(cars, output);
 		});
 	}
 
