@@ -1,9 +1,11 @@
 package model;
 
-import constant.TextGroup;
 import io.RacingGameOutput;
 
 public class Car implements Comparable<Car> {
+
+	private static final String INTER_TEXT = ":";
+	private static final String MOVING_TEXT = "-";
 
 	private CarName carName;
 	private CarDistance carDistance;
@@ -16,13 +18,23 @@ public class Car implements Comparable<Car> {
 	}
 
 	protected String getStatus() {
-		StringBuffer temp = new StringBuffer();
-		temp.append(carName.getName()).append(TextGroup.INTER_TEXT.getText());
+		StringBuffer tempBuffer = new StringBuffer();
+		appendCarName(tempBuffer);
+		appendCarMoving(tempBuffer);
+
+		return tempBuffer.toString();
+	}
+
+	private StringBuffer appendCarName(StringBuffer tempBuffer) {
+		return tempBuffer.append(carName.getName()).append(INTER_TEXT);
+	}
+
+	private void appendCarMoving(StringBuffer tempBuffer) {
 		int distance = carDistance.getDistance();
+
 		for (int index = 0; index < distance; index++) {
-			temp.append(TextGroup.SEPARATOR_TEXT.getText());
+			tempBuffer.append(MOVING_TEXT);
 		}
-		return temp.toString();
 	}
 
 	public void showStatus() {

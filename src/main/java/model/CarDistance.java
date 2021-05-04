@@ -2,10 +2,12 @@ package model;
 
 public class CarDistance {
 
+	private static final int START_DISTANCE = 0;
+
 	private int distance;
 
 	public CarDistance() {
-		this.distance = 0;
+		this.distance = START_DISTANCE;
 	}
 
 	public int add() {
