@@ -66,6 +66,16 @@ public class CarGroupTest {
 		assertThat(carGroup.getCars().get(2).getCarDistance()).isEqualTo(1);
 	}
 
+	@Test
+	@DisplayName("우승자를 return하는지 확인한다.")
+	public void checkWinnerTest() {
+		int[] moveValue = {5, 3, 4};
+		carGroup.moveAll(moveValue);
+		carGroup.moveAll(moveValue);
+		assertThat(carGroup.getWinner().size()).isEqualTo(2);
+		assertThat(carGroup.getWinner().get(0).getCarDistance()).isEqualTo(2);
+	}
+
 	private void checkHasAllNumber(int[] cache) {
 		for (int index = 1; index < 9; index++) {
 			assertThat(cache[index]).isEqualTo(1);

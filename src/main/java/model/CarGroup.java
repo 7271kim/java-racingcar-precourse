@@ -1,11 +1,16 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import constant.IntegetGroup;
 import constant.ValidationMessage;
+import jdk.internal.joptsimple.internal.Strings;
 
 public class CarGroup {
+
+	private static final int ENOUGH_SMALL_NUMBER = -1;
 
 	private List<Car> cars;
 
@@ -22,6 +27,15 @@ public class CarGroup {
 		int[] numbers = getRandomNumbers();
 		moveAll(numbers);
 		showCarsStatus();
+	}
+
+	public void showWinner() {
+		List<Car> winners = getWinner();
+		List<String> result = new ArrayList<>();
+		for (Car winner : winners) {
+			result.add(winner.getCarName());
+		}
+		System.out.println(Strings.join(result, ",") + "가 최종 우승했습니다.");
 	}
 
 	private void showCarsStatus() {
@@ -78,6 +92,25 @@ public class CarGroup {
 		for (int index = 0; index < moveValues.length; index++) {
 			moveWithValue(moveValues, index);
 		}
+	}
+
+	protected List<Car> getWinner() {
+		int min = ENOUGH_SMALL_NUMBER;
+		Collections.sort(cars);
+		List<Car> result = new ArrayList<>();
+		for (Car car : cars) {
+			min = setWinner(min, result, car);
+		}
+		return result;
+	}
+
+	private int setWinner(int min, List<Car> result, Car car) {
+		int distance = car.getCarDistance();
+		if (min <= distance) {
+			min = distance;
+			result.add(car);
+		}
+		return min;
 	}
 
 }

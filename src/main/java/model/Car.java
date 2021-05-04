@@ -2,7 +2,7 @@ package model;
 
 import constant.TextGroup;
 
-public class Car {
+public class Car implements Comparable<Car> {
 
 	private CarName carName;
 	private CarDistance carDistance;
@@ -36,5 +36,10 @@ public class Car {
 
 	public int getCarDistance() {
 		return carDistance.getDistance();
+	}
+
+	@Override
+	public int compareTo(Car compare) {
+		return this.getCarDistance() < compare.getCarDistance() ? 1 : -1;
 	}
 }
