@@ -6,7 +6,6 @@ import java.util.List;
 
 import constant.IntegetGroup;
 import constant.ValidationMessage;
-import jdk.internal.joptsimple.internal.Strings;
 
 public class CarGroup {
 
@@ -35,7 +34,7 @@ public class CarGroup {
 		for (Car winner : winners) {
 			result.add(winner.getCarName());
 		}
-		System.out.println(Strings.join(result, ",") + "가 최종 우승했습니다.");
+		System.out.println(String.join(",", result) + "가 최종 우승했습니다.");
 	}
 
 	private void showCarsStatus() {

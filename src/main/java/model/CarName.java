@@ -7,9 +7,13 @@ public class CarName {
 	private String name;
 
 	public CarName(String name) {
-		name = name.trim();
+		name = removeTrim(name);
 		checkValidation(name);
 		this.name = name;
+	}
+
+	private String removeTrim(String name) {
+		return null != name ? name.trim() : "";
 	}
 
 	private void checkValidation(String name) {

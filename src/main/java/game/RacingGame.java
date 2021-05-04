@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Car;
 import model.CarGroup;
+import model.GameCount;
 
 public class RacingGame {
 
@@ -15,7 +16,23 @@ public class RacingGame {
 	}
 
 	public void start() {
-		getCarGroupFromInput();
+		CarGroup group = getCarGroupFromInput();
+		GameCount count = getGameCountFromInput();
+		for (int index = 0; index < count.getCount(); index++) {
+			group.playOne();
+		}
+		group.showWinner();
+	}
+
+	private GameCount getGameCountFromInput() {
+		GameCount count;
+		try {
+			count = new GameCount(racingInput.getGameCount());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			count = getGameCountFromInput();
+		}
+		return count;
 	}
 
 	private CarGroup getCarGroupFromInput() {
